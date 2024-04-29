@@ -23,7 +23,7 @@ jobs:
         run: npm install -g markdown-toc
 
       - name: Generate Table of Contents
-        run: markdown-toc -i README.md
+        run: markdown-toc -i NUM.py
       - name: Commit changes
         run: |
           git config --local user.email "action@github.com"
