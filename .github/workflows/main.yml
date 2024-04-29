@@ -1,0 +1,38 @@
+
+name: Generate Table of Contents
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  generate-toc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install markdown-toc
+        run: npm install -g markdown-toc
+
+      - name: Generate Table of Contents
+        run: markdown-toc -i README.md
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          git commit -m "Update Table of Contents"
+      
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
