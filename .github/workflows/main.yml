@@ -24,7 +24,6 @@ jobs:
 
       - name: Generate Table of Contents
         run: markdown-toc -i README.md
-
       - name: Commit changes
         run: |
           git config --local user.email "action@github.com"
